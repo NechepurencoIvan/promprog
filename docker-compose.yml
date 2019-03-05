@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  rabbit:
+    image: rabbitmq:3.7.9-alpine
+    expose:
+      - 5672
+  producer:
+    build: 
+       context: .
+       dockerfile: producerDockerfile
+    depends_on:
+      - rabbit
+  consumer:
+    build:
+       context: .
+       dockerfile: consumerDockerfile
+    depends_on:
+      - rabbit
