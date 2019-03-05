@@ -9,7 +9,7 @@ def on_message(ch, method, properties, body):
 
 params = pika.URLParameters("amqp://guest:guest@rabbit:5672/%2F")
 
-for try_numb in range(10):
+for try_numb in range(100):
     try:
         connection = pika.BlockingConnection(params)
         channel = connection.channel()
@@ -23,3 +23,4 @@ for try_numb in range(10):
     except Exception:
         print('Consumer failed to connect', file=sys.stderr)
         channel.start_consuming()
+        time.sleep(1)

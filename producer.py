@@ -5,7 +5,7 @@ import time
 
 params = pika.URLParameters("amqp://guest:guest@rabbit:5672/%2F")
 
-for try_numb in range(10):
+for try_numb in range(100):
     try:
         connection = pika.BlockingConnection(params)
         channel = connection.channel()
@@ -16,4 +16,5 @@ for try_numb in range(10):
             time.sleep(random.uniform(0.3, 1.3))
     except Exception:
         print('Producer failed to connect', file=sys.stderr)
+        time.sleep(1)
 
